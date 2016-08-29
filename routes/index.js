@@ -2,25 +2,24 @@ module.exports = function(io) {
   var express = require('express');
   var router = express.Router();
 
-  var ping = require('ping');
+  const ping = require('node-http-ping');
+
   var hosts = ['webtype.io', 'finance.galleryonthealley.net', 'owebboy.com'];
 
   io.on('connection', function(socket) {
     socket.on('connected', function(data) {
       hosts.forEach(function (host) {
-          ping.promise.probe(host)
-            .then(function (res) {
-              socket.emit('update', { host: host, res: res });
-            });
+        ping(host, 80)
+          .then(time => socket.emit('update', { host: host, time: time }))
+          .catch(error => socket.emit('update', { host: host, err: err }));
       });
       setInterval(function() {
         hosts.forEach(function (host) {
-            ping.promise.probe(host)
-              .then(function (res) {
-                socket.emit('update', { host: host, res: res });
-              });
+        ping(host, 80)
+          .then(time => socket.emit('update', { host: host, time: time }))
+          .catch(error => socket.emit('update', { host: host, err: err }));
         });
-      }, 10000);
+      }, 60000);
     });
   });
 

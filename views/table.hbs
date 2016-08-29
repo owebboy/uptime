@@ -1,4 +1,4 @@
-<table data-refresh-every-n-seconds="10">
+<table data-refresh-every-n-seconds="60">
   <tr>
     <th>
       Website
@@ -47,22 +47,34 @@
 
   socket.on('update', function(data) {
     if (data.host === 'webtype.io') {
-      if (data.res.time) {
-        webtype.textContent = 'up (' + data.res.time + 'ms)';
+      if (data.time) {
+        webtype.textContent = 'up (' + data.time + 'ms)';
+        webtype.classList.add('up');
+        webtype.classList.remove('down');
       } else {
         webtype.textContent = 'down';
+        webtype.classList.add('down');
+        webtype.classList.remove('up');
       }
     } else if (data.host === 'owebboy.com') {
-      if (data.res.time) {
-        owebboy.textContent = 'up (' + data.res.time + 'ms)';
+      if (data.time) {
+        owebboy.textContent = 'up (' + data.time + 'ms)';
+        owebboy.classList.add('up');
+        owebboy.classList.remove('down');
       } else {
         owebboy.textContent = 'down';
+        owebboy.classList.add('down');
+        owebboy.classList.remove('up');
       }
     } else if (data.host === 'finance.galleryonthealley.net') {
-      if (data.res.time) {
-        finance.textContent = 'up (' + data.res.time + 'ms)';
+      if (data.time) {
+        finance.textContent = 'up (' + data.time + 'ms)';
+        finance.classList.add('up');
+        finance.classList.remove('down');
       } else {
         finance.textContent = 'down';
+        finance.classList.add('up');
+        finance.classList.remove('down');
       }
     }
   });

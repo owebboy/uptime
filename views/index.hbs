@@ -4,7 +4,7 @@
 <h2>owebboy: <span class="owebboy">~</span></h2>
 <h2>GalleryFinancial: <span class="finance">~</span></h2>
 
-<a href="panicboard://?url=dXB0aW1lLm93ZWJib3kuY29tL3RhYmxl&panel=table&sourceDisplayName=owebboy">add to status board</a>
+<a href="panicboard://?url=https://uptime.owebboy.com/table&panel=table&sourceDisplayName=owebboy">add to status board</a>
 
 
 
@@ -19,8 +19,8 @@
 
   socket.on('update', function(data) {
     if (data.host === 'webtype.io') {
-      if (data.res.time) {
-        webtype.textContent = 'up (' + data.res.time + 'ms)';
+      if (data.time) {
+        webtype.textContent = 'up (' + data.time + 'ms)';
         webtype.classList.add('up');
         webtype.classList.remove('down');
       } else {
@@ -29,8 +29,8 @@
         webtype.classList.remove('up');
       }
     } else if (data.host === 'owebboy.com') {
-      if (data.res.time) {
-        owebboy.textContent = 'up (' + data.res.time + 'ms)';
+      if (data.time) {
+        owebboy.textContent = 'up (' + data.time + 'ms)';
         owebboy.classList.add('up');
         owebboy.classList.remove('down');
       } else {
@@ -39,8 +39,8 @@
         owebboy.classList.remove('up');
       }
     } else if (data.host === 'finance.galleryonthealley.net') {
-      if (data.res.time) {
-        finance.textContent = 'up (' + data.res.time + 'ms)';
+      if (data.time) {
+        finance.textContent = 'up (' + data.time + 'ms)';
         finance.classList.add('up');
         finance.classList.remove('down');
       } else {
