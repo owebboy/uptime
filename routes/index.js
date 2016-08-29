@@ -6,20 +6,22 @@ module.exports = function(io) {
   var hosts = ['webtype.io', 'finance.galleryonthealley.net', 'owebboy.com'];
 
   io.on('connection', function(socket) {
-    hosts.forEach(function (host) {
-        ping.promise.probe(host)
-          .then(function (res) {
-            socket.emit('update', { host: host, res: res });
-          });
-    });
-    setInterval(function() {
+    socket.on('connected', function(data) {
       hosts.forEach(function (host) {
           ping.promise.probe(host)
             .then(function (res) {
               socket.emit('update', { host: host, res: res });
             });
       });
-    }, 10000);
+      setInterval(function() {
+        hosts.forEach(function (host) {
+            ping.promise.probe(host)
+              .then(function (res) {
+                socket.emit('update', { host: host, res: res });
+              });
+        });
+      }, 10000);
+    });
   });
 
   /* GET home page. */

@@ -11,6 +11,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
   var socket = io.connect();
+  socket.emit('connected');
 
   var webtype = document.querySelector('.webtype');
   var owebboy = document.querySelector('.owebboy');
