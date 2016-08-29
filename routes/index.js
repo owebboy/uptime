@@ -6,6 +6,12 @@ module.exports = function(io) {
   var hosts = ['webtype.io', 'finance.galleryonthealley.net', 'owebboy.com'];
 
   io.on('connection', function(socket) {
+    hosts.forEach(function (host) {
+        ping.promise.probe(host)
+          .then(function (res) {
+            socket.emit('update', { host: host, res: res });
+          });
+    });
     setInterval(function() {
       hosts.forEach(function (host) {
           ping.promise.probe(host)
@@ -13,7 +19,7 @@ module.exports = function(io) {
               socket.emit('update', { host: host, res: res });
             });
       });
-    }, 1000);
+    }, 10000);
   });
 
   /* GET home page. */
