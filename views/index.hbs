@@ -1,0 +1,52 @@
+<h1>{{title}}</h1>
+
+<h2>webtype: <span class="webtype">~</span></h2>
+<h2>owebboy: <span class="owebboy">~</span></h2>
+<h2>GalleryFinancial: <span class="finance">~</span></h2>
+
+<a href="panicboard://?url=dXB0aW1lLm93ZWJib3kuY29tL3RhYmxl&panel=table&sourceDisplayName=owebboy">add to status board</a>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io.connect();
+
+  var webtype = document.querySelector('.webtype');
+  var owebboy = document.querySelector('.owebboy');
+  var finance = document.querySelector('.finance');
+
+  socket.on('update', function(data) {
+    if (data.host === 'webtype.io') {
+      if (data.res.time) {
+        webtype.textContent = 'up (' + data.res.time + 'ms)';
+        webtype.classList.add('up');
+        webtype.classList.remove('down');
+      } else {
+        webtype.textContent = 'down';
+        webtype.classList.add('down');
+        webtype.classList.remove('up');
+      }
+    } else if (data.host === 'owebboy.com') {
+      if (data.res.time) {
+        owebboy.textContent = 'up (' + data.res.time + 'ms)';
+        owebboy.classList.add('up');
+        owebboy.classList.remove('down');
+      } else {
+        owebboy.textContent = 'down';
+        owebboy.classList.add('down');
+        owebboy.classList.remove('up');
+      }
+    } else if (data.host === 'finance.galleryonthealley.net') {
+      if (data.res.time) {
+        finance.textContent = 'up (' + data.res.time + 'ms)';
+        finance.classList.add('up');
+        finance.classList.remove('down');
+      } else {
+        finance.textContent = 'down';
+        finance.classList.add('up');
+        finance.classList.remove('down');
+      }
+    }
+  });
+</script>

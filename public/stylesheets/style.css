@@ -1,0 +1,18 @@
+body {
+  padding: 50px;
+  font: 1em 'roboto', sans-serif;
+  margin: 0;
+}
+a {
+  color: #00b7ff;
+}
+h2 {
+  font-family: 'space mono';
+  font-weight: 500;
+}
+.up {
+  color: #58cb37;
+}
+.down {
+  color: #e64136;
+}

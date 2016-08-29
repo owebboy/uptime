@@ -1,0 +1,68 @@
+<table data-refresh-every-n-seconds="1">
+  <tr>
+    <th>
+      Website
+    </th>
+    <th>
+      Uptime
+    </th>
+  </tr>
+  <tr>
+    <td>
+      webtype.io
+    </td>
+    <td class="webtype">
+      ~ ms
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      owebboy.com
+    </td>
+    <td class="owebboy">
+      ~ ms
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      finance.galleryonthealley.net
+    </td>
+    <td class="finance">
+      ~ ms
+    </td>
+  </tr>
+</table>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io.connect();
+
+  var webtype = document.querySelector('.webtype');
+  var owebboy = document.querySelector('.owebboy');
+  var finance = document.querySelector('.finance');
+
+  socket.on('update', function(data) {
+    if (data.host === 'webtype.io') {
+      if (data.res.time) {
+        webtype.textContent = 'up (' + data.res.time + 'ms)';
+      } else {
+        webtype.textContent = 'down';
+      }
+    } else if (data.host === 'owebboy.com') {
+      if (data.res.time) {
+        owebboy.textContent = 'up (' + data.res.time + 'ms)';
+      } else {
+        owebboy.textContent = 'down';
+      }
+    } else if (data.host === 'finance.galleryonthealley.net') {
+      if (data.res.time) {
+        finance.textContent = 'up (' + data.res.time + 'ms)';
+      } else {
+        finance.textContent = 'down';
+      }
+    }
+  });
+</script>
